@@ -5,7 +5,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
 Plug 'Lokaltog/vim-easymotion'
+Plug 'leafOfTree/vim-vue-plugin'
 Plug 'bling/vim-airline'
+Plug 'https://github.com/mkitt/tabline.vim.git'
 Plug 'https://github.com/lambdatoast/elm.vim.git'
 Plug 'w0rp/ale'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -84,8 +86,9 @@ set wildmenu
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd
 set wildignore+=node_modules/*,bower_components/*
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-let g:prettier#autoformat = 0
+let g:prettier#autoformat = 1
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 "Unite mapping
@@ -99,6 +102,11 @@ set laststatus=2
 
 set t_Co=256
 colorscheme jellybeans
+"Tabline settings
+hi TabLine      ctermfg=Black  ctermbg=Green     cterm=NONE
+hi TabLineFill  ctermfg=Black  ctermbg=Green     cterm=NONE
+hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
+"##############
 syntax on
 filetype plugin indent on
 set tabstop=4
@@ -107,5 +115,8 @@ set expandtab
 set relativenumber
 set bs=2
 set foldmethod=syntax
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
 set cmdheight=3
 
