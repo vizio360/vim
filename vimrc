@@ -37,7 +37,7 @@ let g:deoplete#enable_at_startup = 1
 
 " Function argument completion for Deoplete
 Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+Plug 'vizio360/neosnippet-snippets'
 
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -109,7 +109,7 @@ hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
 "##############
 syntax on
 filetype plugin indent on
-set tabstop=4
+set tabstop=2
 set shiftwidth=4
 set expandtab
 set relativenumber
