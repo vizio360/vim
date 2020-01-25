@@ -8,14 +8,10 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'leafOfTree/vim-vue-plugin'
 Plug 'bling/vim-airline'
 Plug 'https://github.com/mkitt/tabline.vim.git'
-Plug 'https://github.com/lambdatoast/elm.vim.git'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'https://github.com/wesQ3/vim-windowswap'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 if has('nvim')
   " Dark-powered Async completion (needs python3)
@@ -25,9 +21,6 @@ else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
-
-" Add flow to deoplete
-  Plug 'wokalski/autocomplete-flow'
 
   " the path to python3 is obtained through executing `:echo exepath('python3')` in vim
   let g:python3_host_prog = "/usr/local/bin/python3"
@@ -60,15 +53,12 @@ if has('conceal')
 endif
 
 
-
-" Unite
-"   depend on vimproc
-"   ------------- VERY IMPORTANT ------------
-"   you have to go to .vim/plugin/vimproc.vim and do a ./make
-"   -----------------------------------------
-Plug 'Shougo/vimproc.vim'
-
 call plug#end()
+
+"ALE config
+let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma'
+let g:ale_fix_on_save = 1
 
 let mapleader = ","
 let g:user_emmet_leader_key=','
@@ -88,11 +78,6 @@ set wildignore+=*.pdf,*.psd
 set wildignore+=node_modules/*,bower_components/*
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-let g:prettier#autoformat = 1
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-
-"Unite mapping
-"nnoremap <Leader>f :Unite file<CR>
 
 "powerline status bar
 "let g:Powerline_symbols = 'fancy'
