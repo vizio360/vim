@@ -55,6 +55,10 @@ endif
 
 call plug#end()
 
+
+" forcing vim to save swap files in a specific folder
+:set directory=$HOME/.vim/swapfiles//
+
 "ALE config
 let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma'
