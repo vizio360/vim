@@ -4,6 +4,7 @@ Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'leafOfTree/vim-vue-plugin'
 Plug 'bling/vim-airline'
@@ -13,24 +14,37 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'https://github.com/wesQ3/vim-windowswap'
 
-if has('nvim')
-  " Dark-powered Async completion (needs python3)
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" for vim 8 with python
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
 
-  " the path to python3 is obtained through executing `:echo exepath('python3')` in vim
-  let g:python3_host_prog = "/usr/local/bin/python3"
-endif
-
-let g:deoplete#enable_at_startup = 1
-
+"if has('nvim')
+"  " Dark-powered Async completion (needs python3)
+"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"" for vim 8 with python
+"else
+"  Plug 'Shougo/deoplete.nvim'
+"  Plug 'roxma/nvim-yarp'
+"  Plug 'roxma/vim-hug-neovim-rpc'
+"
+"  " the path to python3 is obtained through executing `:echo exepath('python3')` in vim
+"  let g:python3_host_prog = "/usr/local/bin/python3"
+"endif
 " Function argument completion for Deoplete
 Plug 'Shougo/neosnippet'
 Plug 'vizio360/neosnippet-snippets'
+Plug 'Shougo/echodoc.vim'
+
+call plug#end()
+
+"let g:deoplete#enable_at_startup = 1
+"call deoplete#custom#option('sources', {
+"\ '_': ['ale'],
+"\})
+
+
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'popup'
+autocmd CompleteDone * silent! pclose!
+
+
 
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -52,15 +66,23 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
-
-call plug#end()
-
-
 " forcing vim to save swap files in a specific folder
 :set directory=$HOME/.vim/swapfiles//
 
 "ALE config
-let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let g:ale_completion_enabled = 1
+let g:ale_linters = {
+\  'javascript': ['eslint'], 
+\  'typescript': ['tsserver', 'tslint'],
+\  'vue': ['eslint']
+\}
+let g:ale_fixers = {
+\  'javascript': ['prettier', 'eslint'], 
+\  'typescript': ['prettier'],
+\  'vue': ['eslint'],
+\  'scss': ['prettier'],
+\  'html': ['prettier']
+\}
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma'
 let g:ale_fix_on_save = 1
 
