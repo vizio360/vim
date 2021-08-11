@@ -7,12 +7,17 @@ Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'leafOfTree/vim-vue-plugin'
-Plug 'bling/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'https://github.com/mkitt/tabline.vim.git'
 Plug 'dense-analysis/ale'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'https://github.com/wesQ3/vim-windowswap'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'majutsushi/tagbar'
+Plug 'whiteinge/diffconflicts'
 
 
 "if has('nvim')
@@ -71,6 +76,7 @@ endif
 
 "ALE config
 let g:ale_completion_enabled = 1
+let g:ale_completion_tsserver_autoimport = 1
 let g:ale_linters = {
 \  'javascript': ['eslint'], 
 \  'typescript': ['tsserver', 'tslint'],
@@ -84,7 +90,7 @@ let g:ale_fixers = {
 \  'html': ['prettier']
 \}
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma'
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 
 let mapleader = ","
 let g:user_emmet_leader_key=','
@@ -105,11 +111,19 @@ set wildignore+=node_modules/*,bower_components/*
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 
-"powerline status bar
-"let g:Powerline_symbols = 'fancy'
+
 " show status bar always, even if only one window open
 set laststatus=2
 
+let g:airline#extensions#branch#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#tabs_label = 't'
+let g:airline#extensions#tabline#buffers_label = 'b'
+set encoding=utf-8
 
 set t_Co=256
 colorscheme jellybeans
